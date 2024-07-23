@@ -12,6 +12,8 @@ import com.glucode.about_you.mockdata.MockData
 
 class EngineersFragment : Fragment() {
     private lateinit var binding: FragmentEngineersBinding
+    private var engineersList: List<Engineer> = MockData.engineers
+    private lateinit var adapter: EngineersRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,7 +22,12 @@ class EngineersFragment : Fragment() {
     ): View {
         binding = FragmentEngineersBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
-        setUpEngineersList(MockData.engineers)
+        adapter = EngineersRecyclerViewAdapter(engineersList) {
+            goToAbout(it)
+        }
+        binding.list.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        binding.list.addItemDecoration(dividerItemDecoration)
         return binding.root
     }
 
@@ -30,18 +37,18 @@ class EngineersFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_years) {
-            return true
+        val filteredList = when (item.itemId) {
+            R.id.action_years -> engineersList.sortedByDescending { it.quickStats.years }
+            R.id.action_coffees -> engineersList.sortedByDescending { it.quickStats.coffees }
+            R.id.action_bugs -> engineersList.sortedByDescending { it.quickStats.bugs }
+            else -> return super.onOptionsItemSelected(item)
         }
+        adapter.updateData(filteredList)
         return super.onOptionsItemSelected(item)
     }
 
     private fun setUpEngineersList(engineers: List<Engineer>) {
-        binding.list.adapter = EngineersRecyclerViewAdapter(engineers) {
-            goToAbout(it)
-        }
-        val dividerItemDecoration = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        binding.list.addItemDecoration(dividerItemDecoration)
+        adapter.updateData(engineers)
     }
 
     private fun goToAbout(engineer: Engineer) {

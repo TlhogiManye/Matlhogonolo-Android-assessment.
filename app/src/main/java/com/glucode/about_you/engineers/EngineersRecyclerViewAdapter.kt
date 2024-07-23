@@ -21,6 +21,11 @@ class EngineersRecyclerViewAdapter(
         holder.bind(engineers[position], onClick)
     }
 
+    fun updateData(newEngineers: List<Engineer>) {
+        engineers = newEngineers
+        notifyDataSetChanged()
+    }
+
     inner class EngineerViewHolder(private val binding: ItemEngineerBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(engineer: Engineer, onClick: (Engineer) -> Unit) {
