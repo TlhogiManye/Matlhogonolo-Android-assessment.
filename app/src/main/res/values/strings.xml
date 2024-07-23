@@ -7,6 +7,8 @@
     <string name="engineers_menu_years">Years</string>
     <string name="engineers_menu_coffees">Coffees</string>
     <string name="engineers_menu_bugs">Bugs</string>
+    <string name="profile_image">Profile Image</string>
+
 
     <!--About-->
     <string name="about_screen_title">About</string>

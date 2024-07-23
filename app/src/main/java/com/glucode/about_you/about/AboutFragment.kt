@@ -23,7 +23,7 @@ class AboutFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setUpProfile()
         setUpQuestions()
     }
 
@@ -39,5 +39,11 @@ class AboutFragment: Fragment() {
 
             binding.container.addView(questionView)
         }
+    }
+
+    private fun setUpProfile() {
+        val engineerName = arguments?.getString("name")
+        val engineer = MockData.engineers.first { it.name == engineerName }
+        binding.profileView.setProfile(engineer)
     }
 }
