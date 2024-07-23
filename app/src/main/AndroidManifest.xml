@@ -20,4 +20,10 @@
         </activity>
     </application>
 
+    <!-- Permission to read external storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+
 </manifest>
