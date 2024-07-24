@@ -38,9 +38,9 @@ class EngineersFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val filteredList = when (item.itemId) {
-            R.id.action_years -> engineersList.sortedByDescending { it.quickStats.years }
-            R.id.action_coffees -> engineersList.sortedByDescending { it.quickStats.coffees }
-            R.id.action_bugs -> engineersList.sortedByDescending { it.quickStats.bugs }
+            R.id.action_years -> engineersList.sortedBy { it.quickStats.years }
+            R.id.action_coffees -> engineersList.sortedBy { it.quickStats.coffees }
+            R.id.action_bugs -> engineersList.sortedBy { it.quickStats.bugs }
             else -> return super.onOptionsItemSelected(item)
         }
         adapter.updateData(filteredList)
